@@ -83,7 +83,7 @@ pub(super) fn generate_submap(
 				match reverse_key.clone() {
 					ReverseKey::Mod(modkey) => {
 						bind(
-							&format!("{} {}", main_mod, modkey),
+							&format!("{}+{}", main_mod, get_mod_from_mod_key(modkey)),
 							&key,
 							&format!("{} dispatch -r", current_exe),
 							false,
@@ -120,7 +120,7 @@ pub(super) fn generate_submap(
 				);
 				if let ReverseKey::Mod(modkey) = reverse_key.clone() {
 					bind(
-						&format!("{} {}", main_mod, modkey),
+						&format!("{}+{}", main_mod, get_mod_from_mod_key(modkey)),
 						&mod_key.to_string(),
 						&format!("{} close", current_exe),
 						true,
@@ -145,7 +145,7 @@ pub(super) fn generate_submap(
 					);
 					if let ReverseKey::Mod(modkey) = reverse_key.clone() {
 						bind(
-							&format!("{} {}", main_mod, modkey),
+							&format!("{}+{}", main_mod, get_mod_from_mod_key(modkey)),
 							&i.to_string(),
 							&format!("{} dispatch -o={} -r", current_exe, i),
 							false,
