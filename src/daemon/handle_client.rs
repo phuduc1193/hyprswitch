@@ -166,7 +166,9 @@ pub(super) fn handle_client_transfer(
 					}
 				};
 			} else {
-				return_success(false, &mut stream)?;
+				// No GUI open (e.g. stray Alt-release with static release binds):
+				// idle close is a silent no-op, not an error.
+				return_success(true, &mut stream)?;
 			}
 		}
 		TransferType::Dispatch(dispatch_config) => {
