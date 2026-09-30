@@ -58,6 +58,21 @@ pub(crate) fn init(
 		lock.simple_config = simple_config.clone();
 		lock.gui_config = gui_config.clone();
 		lock.hypr_data = clients_data;
+
+		// Windows-like behavior: pre-select the next window on open, so a
+		// quick open + release switches immediately. Without this, open
+		// selects the current window and open + close is a no-op.
+		if let Ok(next) = find_next(
+			&lock.simple_config.switch_type,
+			&DispatchConfig {
+				reverse: false,
+				offset: 1,
+			},
+			&lock.hypr_data,
+			lock.active.as_ref(),
+		) {
+			lock.active = Some(next);
+		}
 		drop(lock);
 	}
 
