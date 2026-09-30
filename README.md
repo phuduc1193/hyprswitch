@@ -88,6 +88,20 @@ end)
 hl.bind("SUPER + TAB", hl.dsp.exec_cmd("hyprswitch gui --mod-key SUPER --key TAB"))
 ```
 
+### Windows-like Alt+Tab (hold Alt, tap Tab, release to confirm)
+
+```lua
+-- Open the picker pre-selecting the most recently used window
+hl.bind("ALT + TAB", hl.dsp.exec_cmd("hyprswitch gui --mod-key ALT --key TAB --close mod-key-release --sort-recent"))
+
+-- Always-active Alt-release binds to confirm the selection.
+-- (The picker's transient submap is created after the key press, so it can
+-- miss very fast taps. These static binds never miss, and a release with no
+-- picker open is a silent no-op.)
+hl.bind("ALT + Alt_L", hl.dsp.exec_cmd("hyprswitch close"), { release = true, transparent = true })
+hl.bind("ALT + Alt_R", hl.dsp.exec_cmd("hyprswitch close"), { release = true, transparent = true })
+```
+
 See the [Wiki](https://github.com/egnrse/hyprswitch/wiki/Home#usage) for more infos. You can also find [some examples](https://github.com/egnrse/hyprswitch/wiki/02-%E2%80%90-Examples) in it.
 
 
